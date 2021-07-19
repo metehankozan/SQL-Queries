@@ -15,6 +15,6 @@ WHERE rental_rate = (SELECT MIN(rental_rate) FROM film) AND
 SELECT customer.customer_id, customer.first_name, customer.last_name, SubQ.count 
 FROM customer
 INNER JOIN (SELECT customer_id, COUNT(*) AS count FROM payment
-			GROUP BY customer_id) AS SubQ 
-		ON customer.customer_id = SubQ.customer_id
-ORDER BY count DESC;
+		GROUP BY customer_id) AS SubQ 
+	ON customer.customer_id = SubQ.customer_id
+ORDER BY SubQ.count DESC;
